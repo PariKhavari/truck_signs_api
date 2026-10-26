@@ -17,9 +17,8 @@ python manage.py migrate --noinput
 python manage.py collectstatic --noinput
 
 
-if python manage.py shell -c "import sys; from django.contrib.auth import get_user_model;
- sys.exit(0 if get_user_model().objects.filter(username='${DJANGO_SUPERUSER_USERNAME}').exists() else 1)";
-  then echo "Superuser already exists, skipping"
+if python manage.py shell -c "import sys; from django.contrib.auth import get_user_model; sys.exit(0 if get_user_model().objects.filter(username='${DJANGO_SUPERUSER_USERNAME}').exists() else 1)"; then
+  echo "Superuser already exists, skipping"
 else
   python manage.py createsuperuser --noinput
 fi
